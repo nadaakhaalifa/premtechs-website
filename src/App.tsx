@@ -44,7 +44,7 @@ const navigation = [
   { label: "Expertise", href: "#expertise" },
   { label: "Projects", href: "#projects" },
   { label: "About Us", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const technologyPartners = [
@@ -311,7 +311,7 @@ function App() {
             ))}
           </nav>
 
-          <a href="#contact" className="header-button">
+          <a href="/contact" className="header-button">
             Schedule a Call
             <ArrowRight size={17} />
           </a>
@@ -361,7 +361,7 @@ function App() {
           ))}
         </nav>
 
-        <a href="#contact" className="mobile-call-button" onClick={closeMenu}>
+        <a href="/contact" className="mobile-call-button" onClick={closeMenu}>
           Schedule a Call
           <ArrowRight size={18} />
         </a>
@@ -397,7 +397,7 @@ function App() {
                   <ArrowRight size={18} />
                 </a>
 
-                <a href="#contact" className="button button--secondary">
+                <a href="/contact" className="button button--secondary">
                   Talk to an Expert
                   <ArrowRight size={18} />
                 </a>
@@ -514,7 +514,7 @@ function App() {
                     ))}
                   </div>
 
-                  <a href="#contact" aria-label={`Learn about ${service.title}`}>
+                  <a href="/contact" aria-label={`Learn about ${service.title}`}>
                     Explore service
                     <ArrowRight size={17} />
                   </a>
@@ -600,7 +600,7 @@ function App() {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
 
-                    <a href="#contact">
+                    <a href="/contact">
                       Discuss this solution
                       <ArrowRight size={18} />
                     </a>
@@ -657,7 +657,7 @@ function App() {
                 operate and grow with confidence.
               </p>
 
-              <a href="#contact" className="button button--primary">
+              <a href="/contact" className="button button--primary">
                 Start a Conversation
                 <ArrowRight size={18} />
               </a>
@@ -721,7 +721,7 @@ function App() {
                 <h2>Technology architecture with real business purpose.</h2>
               </div>
 
-              <a href="#contact" className="button button--secondary">
+              <a href="/contact" className="button button--secondary">
                 Discuss Your Project
                 <ArrowRight size={18} />
               </a>
@@ -752,7 +752,7 @@ function App() {
                     ))}
                   </div>
 
-                  <a href="#contact">
+                  <a href="/contact">
                     Explore solution
                     <ArrowRight size={17} />
                   </a>
@@ -918,7 +918,7 @@ function App() {
               <a href="#about">About Us</a>
               <a href="#projects">Projects</a>
               <a href="#expertise">Expertise</a>
-              <a href="#contact">Contact</a>
+              <a href="/contact">Contact</a>
             </div>
 
             <div>
