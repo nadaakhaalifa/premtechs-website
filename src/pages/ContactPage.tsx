@@ -26,6 +26,7 @@ import {
 import logo from "../assets/premtechs-logo.png";
 import "../App.css";
 import "./ContactPage.css";
+import { FaWhatsapp } from "react-icons/fa";
 
 type ContactFormData = {
   fullName: string;
@@ -564,8 +565,7 @@ function ContactPage() {
                           : ""
                       }`}
                     >
-                      <MessageSquareText size={18} />
-
+                      <FaWhatsapp size={21} />
                       <textarea
                         rows={6}
                         value={formData.message}
@@ -640,18 +640,37 @@ function ContactPage() {
                   <ArrowRight size={18} />
                 </a>
 
-                <a href="tel:+10000000000">
+                <a href="tel:+201055035575">
                   <span>
                     <Phone size={21} />
                   </span>
 
                   <div>
                     <small>Call us</small>
-                    <strong>+1 000 000 0000</strong>
+                    <strong>+20 1055035575</strong>
                   </div>
 
                   <ArrowRight size={18} />
                 </a>
+
+
+                <a
+                  href="https://wa.me/971585193371"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>
+                    <FaWhatsapp size={21} />
+                  </span>
+
+                  <div>
+                    <small>WhatsApp</small>
+                   <strong>+971 58 519 3371</strong>
+                  </div>
+
+                  <ArrowRight size={18} />
+                </a>
+                
 
                 <div>
                   <span>
