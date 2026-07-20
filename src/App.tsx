@@ -278,51 +278,6 @@ function App() {
     };
   }, [menuOpen]);
 
-  useEffect(() => {
-    const revealTargets = document.querySelectorAll<HTMLElement>(
-      ".section, .performance-section, .technology-strip, .service-card, .specialty-service, .architecture-card, .performance-item, .approach-process article, .expertise-shell, .contact-shell",
-    );
-
-    revealTargets.forEach((element, index) => {
-      element.classList.add("reveal-on-scroll");
-      element.style.setProperty("--reveal-delay", `${(index % 4) * 25}ms`);
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px 40px" },
-    );
-
-    revealTargets.forEach((element) => observer.observe(element));
-
-    const handlePointerMove = (event: PointerEvent) => {
-      document.documentElement.style.setProperty("--pointer-x", `${event.clientX}px`);
-      document.documentElement.style.setProperty("--pointer-y", `${event.clientY}px`);
-
-      const hero = document.querySelector<HTMLElement>(".hero-logo-stage");
-      if (!hero) return;
-
-      const rect = hero.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-      hero.style.setProperty("--parallax-x", `${x * 12}px`);
-      hero.style.setProperty("--parallax-y", `${y * 12}px`);
-    };
-
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("pointermove", handlePointerMove);
-    };
-  }, []);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -734,7 +689,7 @@ function App() {
         .reveal-on-scroll {
           opacity: 0;
           transform: translateY(34px) scale(.985);
-          filter: blur(2px);
+          filter: blur(7px);
           transition:
             opacity .85s cubic-bezier(.2,.75,.2,1) var(--reveal-delay, 0ms),
             transform .85s cubic-bezier(.2,.75,.2,1) var(--reveal-delay, 0ms),
@@ -895,6 +850,157 @@ function App() {
             transition: none !important;
           }
           .specialty-visual__orbit, .specialty-visual__badge, .architecture-node { animation: none !important; }
+        }
+
+
+        /* Performance-first rendering: content is always visible. */
+        .reveal-on-scroll,
+        .reveal-on-scroll.is-visible {
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+          transition: none !important;
+        }
+
+        /* Avoid expensive full-page pointer tracking and compositing. */
+        .site::before { display: none !important; }
+        .hero-logo-stage__logo-wrap,
+        .hero-logo-stage__orbit--outer,
+        .hero-logo-stage__orbit--inner {
+          translate: none !important;
+        }
+
+        /* Motion stays subtle on capable desktop devices. */
+        @media (min-width: 761px) and (hover: hover) and (pointer: fine) {
+          .specialty-service {
+            transition: border-color .25s ease, background-color .25s ease;
+          }
+          .specialty-service:hover {
+            transform: none !important;
+            box-shadow: none !important;
+          }
+          .specialty-service:hover .specialty-visual__core {
+            transform: scale(1.035);
+            box-shadow: 0 28px 64px rgba(13, 93, 91, .18);
+          }
+        }
+
+        /* Mobile performance mode: preserve the design without costly effects. */
+        @media (max-width: 760px), (hover: none), (pointer: coarse) {
+          .site *,
+          .site *::before,
+          .site *::after {
+            animation: none !important;
+            transition-duration: .16s !important;
+            scroll-behavior: auto !important;
+          }
+
+          .site-header,
+          .hero-float,
+          .hero-logo-stage__status,
+          .specialty-visual__badge,
+          .about-brand-panel,
+          .contact-card {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
+
+          .hero { overflow: hidden; }
+          .hero-logo-stage {
+            min-height: 390px !important;
+            perspective: none !important;
+          }
+          .hero-logo-stage__mesh,
+          .hero-logo-stage__beam,
+          .hero-logo-stage__orbit--inner,
+          .platform-ring,
+          .orbit-dot { display: none !important; }
+          .hero-logo-stage__orbit--outer {
+            width: 88% !important;
+            opacity: .35;
+          }
+          .hero-logo-stage__logo-wrap { width: 72% !important; }
+          .hero-logo-stage__logo {
+            transform: scale(1.08) !important;
+            filter: drop-shadow(0 22px 24px rgba(8,52,67,.18)) !important;
+          }
+          .hero-logo-stage__platform {
+            width: 62% !important;
+            height: 14% !important;
+            box-shadow: 0 20px 40px rgba(21,91,88,.14) !important;
+          }
+          .hero-float {
+            background: rgba(255,255,255,.94) !important;
+            box-shadow: 0 10px 24px rgba(18,91,87,.09) !important;
+          }
+
+          .specialty-services__intro {
+            margin-bottom: 20px !important;
+          }
+          .specialty-service {
+            gap: 26px !important;
+            padding: clamp(44px, 10vw, 64px) 0 !important;
+            transform: none !important;
+            box-shadow: none !important;
+          }
+          .specialty-service__content h3 {
+            font-size: clamp(2.25rem, 11vw, 3.5rem) !important;
+          }
+          .specialty-service__content > p {
+            margin-top: 18px !important;
+            line-height: 1.72 !important;
+          }
+          .specialty-service__features {
+            grid-template-columns: 1fr !important;
+            gap: 11px !important;
+            margin-top: 24px !important;
+          }
+          .specialty-service__visual {
+            min-height: 300px !important;
+            contain: layout paint;
+          }
+          .specialty-visual__halo {
+            width: 76% !important;
+            box-shadow: none !important;
+            background: radial-gradient(circle,#fff 0 24%,rgba(207,239,229,.72) 48%,transparent 72%) !important;
+          }
+          .specialty-visual__orbit {
+            width: 82% !important;
+            opacity: .58;
+          }
+          .specialty-visual__line { display: none !important; }
+          .specialty-visual__core {
+            width: 170px !important;
+            height: 170px !important;
+            box-shadow: 0 22px 48px rgba(10,72,76,.18) !important;
+          }
+          .specialty-visual__core svg {
+            width: 64px !important;
+            height: 64px !important;
+          }
+          .specialty-visual__badge {
+            padding: 10px 12px !important;
+            border-radius: 14px !important;
+            background: rgba(255,255,255,.96) !important;
+            box-shadow: 0 8px 20px rgba(11,78,78,.08) !important;
+          }
+
+          .architecture-card__visual {
+            min-height: 250px !important;
+            contain: layout paint;
+          }
+          .architecture-orbit--two,
+          .architecture-node--two,
+          .architecture-node--three { display: none !important; }
+          .architecture-logo { box-shadow: none !important; }
+
+          .expertise-diagram__ring--two { display: none !important; }
+          .performance-item:hover,
+          .architecture-card:hover,
+          .contact-card:hover {
+            transform: none !important;
+            box-shadow: none !important;
+          }
         }
       `}</style>
       <header
