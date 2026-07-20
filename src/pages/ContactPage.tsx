@@ -13,7 +13,6 @@ import {
   Mail,
   MapPin,
   Menu,
-  MessageSquareText,
   Network,
   Phone,
   Send,
