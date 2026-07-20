@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight,
   BarChart3,
+  Cable,
+  Cctv,
   Check,
   ChevronRight,
   Cloud,
-  Database,
   Globe2,
   Headphones,
-  Layers3,
   LockKeyhole,
   Menu,
   Network,
+  RadioTower,
   Server,
   ShieldCheck,
   Sparkles,
@@ -24,8 +25,11 @@ import "./App.css";
 type Service = {
   icon: React.ReactNode;
   title: string;
+  eyebrow: string;
   description: string;
   points: string[];
+  badgeOne: { icon: React.ReactNode; label: string };
+  badgeTwo: { icon: React.ReactNode; label: string };
 };
 
 type ArchitectureCard = {
@@ -42,7 +46,6 @@ const navigation = [
   { label: "Services", href: "#services" },
   { label: "Solutions", href: "#solutions" },
   { label: "Expertise", href: "#expertise" },
-  { label: "Projects", href: "#projects" },
   { label: "About Us", href: "#about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -54,50 +57,118 @@ const technologyPartners = [
   "Cisco",
   "Fortinet",
   "Palo Alto",
+  "AWS",
 ];
 
 const services: Service[] = [
   {
-    icon: <Cloud size={26} />,
+    icon: <Cloud />,
     title: "Cloud Infrastructure",
+    eyebrow: "Cloud strategy & operations",
     description:
-      "Secure and scalable cloud environments built for performance, availability, and long-term business growth.",
-    points: ["Cloud architecture", "Hybrid cloud", "Backup and recovery"],
+      "PremTechs designs, migrates, manages, and monitors secure cloud environments that support performance, resilience, business continuity, and long-term growth across public, private, hybrid, and multi-cloud platforms.",
+    points: [
+      "Cloud Migration (OCI, GCP, AWS, Azure & Alibaba Cloud)",
+      "Managed IT Services",
+      "Professional Services",
+      "Infrastructure Monitoring",
+      "Cloud architecture and optimization",
+      "Backup, recovery and business continuity",
+    ],
+    badgeOne: { icon: <Server size={19} />, label: "Multi-cloud ready" },
+    badgeTwo: { icon: <BarChart3 size={19} />, label: "Managed & monitored" },
   },
   {
-    icon: <Network size={26} />,
-    title: "Network and Security Architecture",
+    icon: <Network />,
+    title: "Network and Security Infrastructure",
+    eyebrow: "Connected & protected operations",
     description:
-      "Resilient enterprise networks connecting people, locations, systems, applications, and cloud environments.",
-    points: ["LAN and WAN", "SD-WAN", "Wireless infrastructure"],
+      "We build dependable network foundations that connect users, offices, devices, applications, cloud platforms, and remote teams while maintaining strong security, visibility, performance, and availability.",
+    points: [
+      "Network Design and Installation",
+      "Switching and Routing",
+      "Firewall Installation and Management",
+      "VPN and Secure Remote Access",
+      "Network Security and Monitoring",
+      "Wireless Networks and Access Points",
+    ],
+    badgeOne: { icon: <ShieldCheck size={19} />, label: "Secure by design" },
+    badgeTwo: { icon: <RadioTower size={19} />, label: "Always connected" },
   },
   {
-    icon: <Layers3 size={26} />,
-    title: "Cloud Migration",
+    icon: <ShieldCheck />,
+    title: "Cybersecurity",
+    eyebrow: "Protection across every layer",
     description:
-      "Structured migration planning that moves applications, systems, and data with minimal disruption.",
-    points: ["Migration planning", "Workload assessment", "Post-migration support"],
-  },
-    {
-    icon: <ShieldCheck size={26} />,
-    title: "Cyber Security",
-    description:
-      "Layered protection for infrastructure, identities, applications, endpoints, users, and critical data.",
-    points: ["Zero trust", "Firewall strategy", "Threat protection"],
-  },
-  {
-    icon: <BarChart3 size={26} />,
-    title: "Monitoring & Management",
-    description:
-      "Continuous monitoring and optimization across cloud, network, security, server, and application environments.",
-    points: ["24/7 monitoring", "Performance reporting", "Proactive maintenance"],
+      "PremTechs delivers practical, layered cybersecurity that protects identities, endpoints, applications, cloud environments, networks, and critical data while helping your organization reduce risk and respond confidently to threats.",
+    points: [
+      "Cybersecurity Assessments",
+      "Cloud Security",
+      "Zero-Trust Security Strategy",
+      "Identity and Access Management",
+      "Multi-Factor Authentication",
+      "Endpoint Protection",
+      "Vulnerability Assessment and Security Hardening",
+      "Security Monitoring and Incident Response",
+    ],
+    badgeOne: { icon: <LockKeyhole size={19} />, label: "Identity protected" },
+    badgeTwo: { icon: <BarChart3 size={19} />, label: "Threat visibility" },
   },
   {
-    icon: <Headphones size={26} />,
-    title: "Managed IT Services",
+    icon: <BarChart3 />,
+    title: "Monitoring & Managed IT",
+    eyebrow: "Continuous operational support",
     description:
-      "Reliable technology support and proactive management that keeps your business productive and secure.",
-    points: ["Technical support", "System maintenance", "IT operations"],
+      "We provide proactive monitoring, professional services, technical support, maintenance, and operational management to keep your infrastructure stable, secure, visible, and aligned with your business priorities.",
+    points: [
+      "Infrastructure Monitoring",
+      "Managed IT Services",
+      "Professional Services",
+      "Performance and Availability Monitoring",
+      "Preventive Maintenance",
+      "Technical Support and Incident Coordination",
+    ],
+    badgeOne: { icon: <Headphones size={19} />, label: "Responsive support" },
+    badgeTwo: { icon: <Server size={19} />, label: "Proactive operations" },
+  },
+  {
+    icon: <Cable />,
+    title: "Cabling & Fiber Infrastructure",
+    eyebrow: "Reliable physical infrastructure",
+    description:
+      "We design and install professional copper and fiber infrastructure that provides a clean, certified, scalable foundation for networks, data centers, wireless systems, surveillance, voice, and business-critical applications.",
+    points: [
+      "Structured Cabling Design and Installation",
+      "Cat6 and Cat6A Network Cabling",
+      "Fiber Optic Backbone Solutions",
+      "Fiber Termination, Splicing and Testing",
+      "Network Rack and Cabinet Installation",
+      "Patch Panel and Cable Management Solutions",
+      "Cable Testing, Certification and Fault Detection",
+      "Professional Labeling and As-Built Documentation",
+    ],
+    badgeOne: { icon: <Server size={19} />, label: "Certified links" },
+    badgeTwo: { icon: <Network size={19} />, label: "Built to scale" },
+  },
+  {
+    icon: <Cctv />,
+    title: "Surveillance & Communication Solutions",
+    eyebrow: "Visibility, access & communication",
+    description:
+      "We integrate surveillance, access, attendance, intercom, voice, and unified communication technologies into one dependable environment that improves safety, control, collaboration, and operational awareness.",
+    points: [
+      "CCTV Surveillance Systems",
+      "Access Control Systems",
+      "Time Attendance Systems",
+      "Intercom Systems",
+      "Remote Monitoring",
+      "IP Telephony",
+      "Unified Communications",
+      "IP PBX Systems",
+      "SIP and Voice Solutions",
+    ],
+    badgeOne: { icon: <ShieldCheck size={19} />, label: "Intelligent security" },
+    badgeTwo: { icon: <RadioTower size={19} />, label: "Unified communication" },
   },
 ];
 
@@ -105,77 +176,82 @@ const architectureCards: ArchitectureCard[] = [
   {
     number: "01",
     icon: <Cloud size={25} />,
-    eyebrow: "Cloud foundation",
-    title: "Cloud Infrastructure",
+    eyebrow: "Cloud transformation",
+    title: "Cloud Infrastructure & Operations",
     description:
-      "We design cloud environments around your applications, users, security requirements, performance needs, and growth plans.",
+      "We plan, migrate, operate, and continuously improve secure cloud environments that support performance, availability, resilience, and long-term business growth.",
     features: [
-      "Microsoft Azure and Microsoft 365",
-      "Oracle Cloud Infrastructure",
-      "Google Cloud environments",
-      "Hybrid and multi-cloud architecture",
-      "Backup and disaster recovery",
-      "Cloud governance and optimization",
+      "Cloud migration across OCI, GCP, AWS, Azure, and Alibaba Cloud",
+      "Public, private, hybrid, and multi-cloud architecture",
+      "Managed IT and professional technology services",
+      "Infrastructure health, performance, and availability monitoring",
+      "Backup, disaster recovery, and business continuity planning",
+      "Cloud governance, cost optimization, and lifecycle support",
     ],
   },
   {
     number: "02",
     icon: <Network size={25} />,
-    eyebrow: "Connected operations",
-    title: "Network and Security Architecture",
+    eyebrow: "Secure connectivity",
+    title: "Network & Security Infrastructure",
     description:
-      "We create reliable network foundations that keep users, branches, devices, cloud services, and applications connected.",
+      "We create secure, high-performance network environments that connect users, offices, devices, applications, cloud platforms, and remote teams without compromising reliability or control.",
     features: [
-      "LAN, WAN, and SD-WAN design",
-      "Routing and switching",
-      "Enterprise wireless networks",
-      "Multi-location connectivity",
-      "Network segmentation",
-      "Performance and resilience planning",
+      "Enterprise network planning, design, and installation",
+      "Professional switching and routing implementation",
+      "Firewall deployment, configuration, and ongoing management",
+      "VPN and protected remote-access solutions",
+      "Continuous network security and performance monitoring",
+      "Business-grade wireless networks and access-point deployment",
     ],
   },
   {
     number: "03",
     icon: <ShieldCheck size={25} />,
-    eyebrow: "Security by design",
-    title: "Cyber Security",
+    eyebrow: "Protection by design",
+    title: "Cybersecurity",
     description:
-      "We build layered cybersecurity strategies that reduce risk while supporting productivity, accessibility, and business continuity.",
+      "We deliver layered security strategies that protect identities, endpoints, applications, cloud services, networks, and critical information while improving visibility and response readiness.",
     features: [
-      "Fortinet security solutions",
-      "Palo Alto Networks architecture",
-      "Zero-trust security strategy",
-      "Identity and access management",
-      "Endpoint and network protection",
-      "Security assessments and monitoring",
+      "Cybersecurity posture and risk assessments",
+      "Cloud-security architecture and control implementation",
+      "Zero-trust strategy and identity-centered protection",
+      "Identity access management and multi-factor authentication",
+      "Endpoint protection, vulnerability assessment, and hardening",
+      "Security monitoring, incident detection, and coordinated response",
     ],
   },
-];
-
-const projects = [
   {
-    number: "01",
-    type: "Cloud transformation",
-    title: "Modern hybrid-cloud infrastructure",
+    number: "04",
+    icon: <Cable size={25} />,
+    eyebrow: "Physical connectivity",
+    title: "Cabling & Fiber Infrastructure",
     description:
-      "A scalable cloud architecture designed to improve performance, resilience, secure access, and operational visibility.",
-    tags: ["Cloud", "Identity", "Backup"],
+      "We engineer clean, certified, and scalable copper and fiber systems that form the physical foundation for data, voice, wireless, surveillance, and business-critical technology.",
+    features: [
+      "Structured cabling planning and professional installation",
+      "Cat6 and Cat6A network cabling systems",
+      "Fiber-optic backbone design and deployment",
+      "Fiber termination, fusion splicing, testing, and validation",
+      "Network racks, cabinets, patch panels, and cable organization",
+      "Certification, fault detection, labeling, and as-built documentation",
+    ],
   },
   {
-    number: "02",
-    type: "Network modernization",
-    title: "Secure multi-location connectivity",
+    number: "05",
+    icon: <Cctv size={25} />,
+    eyebrow: "Intelligent environments",
+    title: "Surveillance & Communication Solutions",
     description:
-      "A centralized network strategy connecting branches, cloud services, remote users, and critical applications.",
-    tags: ["SD-WAN", "Wireless", "Monitoring"],
-  },
-  {
-    number: "03",
-    type: "Security architecture",
-    title: "Layered enterprise protection",
-    description:
-      "A security-first infrastructure combining segmentation, firewalls, endpoint controls, identity, and continuous monitoring.",
-    tags: ["Zero Trust", "Firewall", "Endpoint"],
+      "We integrate security, access, monitoring, voice, and communication technologies into unified environments that improve visibility, safety, collaboration, and operational control.",
+    features: [
+      "IP CCTV surveillance and centralized video management",
+      "Access-control, time-attendance, and intercom systems",
+      "Secure local and remote monitoring capabilities",
+      "Business IP telephony and enterprise voice deployment",
+      "Unified communications and collaboration platforms",
+      "IP PBX, SIP trunking, and scalable voice solutions",
+    ],
   },
 ];
 
@@ -201,6 +277,52 @@ function App() {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const revealTargets = document.querySelectorAll<HTMLElement>(
+      ".section, .performance-section, .technology-strip, .service-card, .specialty-service, .architecture-card, .performance-item, .approach-process article, .expertise-shell, .contact-shell",
+    );
+
+    revealTargets.forEach((element, index) => {
+      element.classList.add("reveal-on-scroll");
+      element.style.setProperty("--reveal-delay", `${(index % 4) * 25}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px 40px" },
+    );
+
+    revealTargets.forEach((element) => observer.observe(element));
+
+    const handlePointerMove = (event: PointerEvent) => {
+      document.documentElement.style.setProperty("--pointer-x", `${event.clientX}px`);
+      document.documentElement.style.setProperty("--pointer-y", `${event.clientY}px`);
+
+      const hero = document.querySelector<HTMLElement>(".hero-logo-stage");
+      if (!hero) return;
+
+      const rect = hero.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      hero.style.setProperty("--parallax-x", `${x * 12}px`);
+      hero.style.setProperty("--parallax-y", `${y * 12}px`);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("pointermove", handlePointerMove);
+    };
+  }, []);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -255,9 +377,6 @@ function App() {
         .hero-float--security .hero-float__icon { color:white; background:rgba(255,255,255,.14); }
         .hero-float--security small { color:rgba(255,255,255,.68); }
         .hero-float--network { left:8%; bottom:18%; animation:chipFloat 4.4s ease-in-out infinite 1.1s; }
-        .hero-mini-node { position:absolute; z-index:5; width:50px; height:50px; display:grid; place-items:center; border-radius:16px; color:#167f78; background:rgba(255,255,255,.74); border:1px solid rgba(255,255,255,.8); box-shadow:0 18px 40px rgba(16,94,90,.13); backdrop-filter:blur(12px); }
-        .hero-mini-node--server { right:13%; top:14%; animation:chipFloat 4.1s ease-in-out infinite .3s; }
-        .hero-mini-node--database { left:18%; top:9%; animation:chipFloat 4.8s ease-in-out infinite .9s; }
         .hero-logo-stage__status { position:absolute; z-index:7; bottom:4%; display:flex; align-items:center; gap:9px; padding:10px 15px; border-radius:999px; color:#496d6b; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.72); backdrop-filter:blur(12px); font-size:.72rem; font-weight:700; letter-spacing:.02em; }
         .hero-logo-stage__status span { width:8px; height:8px; border-radius:50%; background:#38a99d; box-shadow:0 0 0 6px rgba(56,169,157,.12); animation:statusPulse 1.8s ease-in-out infinite; }
         @keyframes premOrbit { to { transform:rotate(360deg); } }
@@ -274,15 +393,509 @@ function App() {
           .hero-logo-stage__platform { width:68%; bottom:12%; }
           .hero-float { padding:10px 11px; border-radius:15px; } .hero-float__icon{width:34px;height:34px;border-radius:11px}
           .hero-float--cloud { left:0; top:17%; } .hero-float--security{right:0;bottom:16%}.hero-float--network{display:none}
-          .hero-mini-node--database{left:8%;top:7%}.hero-mini-node--server{right:8%;top:8%}
           .hero-logo-stage__status{bottom:1%;font-size:.64rem}
         }
         @media (max-width: 460px) {
           .hero-logo-stage { min-height:410px; } .hero-logo-stage__logo-wrap{width:78%}.hero-logo-stage__logo{transform:scale(1.32)}
           .hero-float strong{font-size:.69rem}.hero-float small{font-size:.56rem}.hero-float--cloud{top:20%}.hero-float--security{bottom:17%}
-          .hero-mini-node{width:42px;height:42px;border-radius:13px}.hero-logo-stage__status{display:none}
+          .hero-logo-stage__status{display:none}
         }
+
+        .hero-brand-name {
+          margin: 0 0 18px;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(4.5rem, 9vw, 8.8rem);
+          font-weight: 600;
+          line-height: .78;
+          letter-spacing: -.075em;
+          color: #073f4d;
+          text-shadow: 0 18px 48px rgba(10, 82, 85, .12);
+        }
+        .hero-brand-name span {
+          color: #1a9288;
+        }
+        .hero-brand-tagline {
+          margin: 0 0 22px;
+          color: #167c77;
+          font-size: .76rem;
+          font-weight: 800;
+          letter-spacing: .24em;
+          text-transform: uppercase;
+        }
+        /* Fluid spacing and responsive content width */
+        .container {
+          width: min(calc(100% - clamp(32px, 8vw, 144px)), 1380px);
+          margin-inline: auto;
+        }
+
+        .section {
+          padding-block: clamp(76px, 9vw, 150px);
+        }
+
+        .brand-story {
+          position: relative;
+          overflow: hidden;
+          padding-block: clamp(96px, 10vw, 168px);
+          background:
+            radial-gradient(circle at 12% 8%, rgba(123, 230, 210, .18), transparent 28%),
+            radial-gradient(circle at 88% 88%, rgba(40, 177, 163, .16), transparent 32%),
+            linear-gradient(135deg, #052d38 0%, #074b54 48%, #086e69 100%);
+          color: white;
+          isolation: isolate;
+        }
+
+        .brand-story::before {
+          content: "PREMTECHS";
+          position: absolute;
+          left: 50%;
+          bottom: -.13em;
+          z-index: -1;
+          transform: translateX(-50%);
+          color: rgba(255,255,255,.035);
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(8rem, 20vw, 21rem);
+          font-weight: 700;
+          line-height: .72;
+          letter-spacing: -.08em;
+          white-space: nowrap;
+          pointer-events: none;
+        }
+
+        .brand-story::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: -2;
+          opacity: .12;
+          background-image:
+            linear-gradient(rgba(255,255,255,.11) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.11) 1px, transparent 1px);
+          background-size: 72px 72px;
+          mask-image: radial-gradient(circle at center, #000 0, transparent 78%);
+        }
+
+        .brand-story__shell {
+          position: relative;
+          display: grid;
+          grid-template-columns: minmax(340px, .82fr) minmax(0, 1.18fr);
+          align-items: center;
+          gap: clamp(52px, 8vw, 130px);
+        }
+
+        .brand-story__identity {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: clamp(390px, 42vw, 520px);
+          padding: clamp(30px, 4vw, 52px);
+          border: 1px solid rgba(255,255,255,.16);
+          border-radius: clamp(28px, 3vw, 42px);
+          background: linear-gradient(145deg, rgba(255,255,255,.11), rgba(255,255,255,.035));
+          box-shadow: 0 32px 80px rgba(0, 18, 27, .22);
+          backdrop-filter: blur(22px);
+          overflow: hidden;
+        }
+
+        .brand-story__identity::before {
+          content: "";
+          position: absolute;
+          width: 240px;
+          height: 240px;
+          right: -90px;
+          top: -95px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(137,229,213,.26), transparent 68%);
+          animation: brandPulse 6s ease-in-out infinite;
+        }
+
+        .brand-story__logo-lockup {
+          position: relative;
+          z-index: 1;
+          display: grid;
+          justify-items: start;
+          align-content: start;
+          gap: clamp(20px, 2.4vw, 30px);
+          width: 100%;
+          min-width: 0;
+        }
+
+        .brand-story__logo-frame {
+          width: clamp(68px, 6.5vw, 94px);
+          aspect-ratio: 1;
+          display: grid;
+          place-items: center;
+          flex: 0 0 auto;
+          border-radius: 24px;
+          background: rgba(255,255,255,.96);
+          box-shadow: 0 22px 48px rgba(0,0,0,.18);
+        }
+
+        .brand-story__logo-frame img { width: 76%; height: 76%; object-fit: contain; }
+
+        .brand-story__name {
+          margin: 0;
+          max-width: 100%;
+          color: white;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(2.55rem, 3.7vw, 4.35rem);
+          font-weight: 600;
+          line-height: .92;
+          letter-spacing: -.055em;
+          white-space: nowrap;
+        }
+
+        .brand-story__name span { color: #91e6d7; }
+
+        .brand-story__identity-copy { position: relative; z-index: 1; max-width: 410px; }
+        .brand-story__identity-copy strong {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 16px;
+          color: #a8eee2;
+          font-size: .72rem;
+          letter-spacing: .2em;
+          text-transform: uppercase;
+        }
+        .brand-story__identity-copy strong::before { content:""; width: 34px; height: 1px; background: currentColor; }
+        .brand-story__identity-copy p { margin: 0; color: rgba(255,255,255,.74); font-size: clamp(.95rem, 1.1vw, 1.05rem); line-height: 1.8; }
+
+        .brand-story__copy { min-width: 0; }
+        .brand-story__copy .section-label { color: #91e6d7; letter-spacing: .22em; }
+
+        .brand-story__headline {
+          margin: 20px 0 30px;
+          color: white;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(3rem, 5.6vw, 6.5rem);
+          font-weight: 500;
+          line-height: .94;
+          letter-spacing: -.058em;
+          text-wrap: balance;
+        }
+
+        .brand-story__headline span {
+          display: block;
+          width: fit-content;
+          background: linear-gradient(90deg, #fff 0%, #fff 38%, #9cebdd 54%, #fff 72%, #fff 100%);
+          background-size: 240% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          animation: brandTextSweep 7s ease-in-out infinite;
+        }
+        .brand-story__headline span:nth-child(2) { animation-delay: .45s; }
+        .brand-story__headline span:nth-child(3) { animation-delay: .9s; }
+
+        .brand-story__copy > p {
+          max-width: 790px;
+          margin: 0;
+          color: rgba(255,255,255,.76);
+          font-size: clamp(1rem, 1.25vw, 1.16rem);
+          line-height: 1.9;
+        }
+
+        .brand-story__pillars {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 12px;
+          margin-top: 38px;
+        }
+
+        .brand-story__pillars span {
+          display: flex;
+          align-items: center;
+          gap: 11px;
+          min-height: 58px;
+          padding: 15px 17px;
+          border: 1px solid rgba(255,255,255,.13);
+          border-radius: 16px;
+          background: rgba(255,255,255,.07);
+          color: rgba(255,255,255,.94);
+          font-size: .79rem;
+          font-weight: 800;
+          backdrop-filter: blur(12px);
+          transition: transform .3s ease, background .3s ease, border-color .3s ease;
+        }
+
+        .brand-story__pillars span::before {
+          content: "";
+          width: 7px;
+          height: 7px;
+          flex: 0 0 auto;
+          border-radius: 50%;
+          background: #8ce2d4;
+          box-shadow: 0 0 0 5px rgba(140,226,212,.10);
+        }
+
+        .brand-story__pillars span:hover {
+          transform: translateY(-4px);
+          border-color: rgba(150,235,220,.42);
+          background: rgba(255,255,255,.12);
+        }
+
+        @keyframes brandTextSweep {
+          0%, 20% { background-position: 100% 50%; }
+          55%, 100% { background-position: -120% 50%; }
+        }
+        @keyframes brandPulse { 0%,100% { transform: scale(.9); opacity:.6; } 50% { transform: scale(1.12); opacity:1; } }
+
+        @media (max-width: 1120px) {
+          .brand-story__shell { grid-template-columns: 1fr; gap: 42px; }
+          .brand-story__identity {
+            min-height: auto;
+            display: grid;
+            grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr);
+            align-items: center;
+            gap: clamp(30px, 5vw, 64px);
+          }
+          .brand-story__logo-lockup { align-content: center; }
+          .brand-story__name { font-size: clamp(2.7rem, 6vw, 4.5rem); }
+          .brand-story__pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 700px) {
+          .container { width: min(calc(100% - 32px), 1380px); }
+          .section { padding-block: 76px; }
+          .brand-story { padding-block: 82px; }
+          .brand-story__identity { display: flex; min-height: 0; padding: 30px; gap: 54px; }
+          .brand-story__logo-lockup { justify-items: center; text-align: center; }
+          .brand-story__name { font-size: clamp(2.5rem, 11vw, 3.8rem); }
+          .brand-story__identity-copy { max-width: none; }
+          .brand-story__headline { font-size: clamp(2.7rem, 12vw, 4.4rem); }
+          .brand-story__pillars { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 460px) {
+          .container { width: min(calc(100% - 24px), 1380px); }
+          .brand-story__identity { min-height: 0; padding: 24px; border-radius: 26px; gap: 44px; }
+          .brand-story__logo-frame { border-radius: 20px; }
+          .brand-story__name { font-size: clamp(2.2rem, 12vw, 3.2rem); }
+          .brand-story__headline { font-size: clamp(2.35rem, 12vw, 3.5rem); }
+          .brand-story__copy > p { line-height: 1.75; }
+        }
+
+        .specialty-services { position:relative; overflow:hidden; background:linear-gradient(180deg,#f8f4ec 0%,#eef8f4 52%,#f8f4ec 100%); }
+        .specialty-services::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 12% 18%,rgba(97,190,173,.18),transparent 28%),radial-gradient(circle at 88% 72%,rgba(8,51,67,.10),transparent 32%); pointer-events:none; }
+        .specialty-services__intro { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.65fr); align-items:end; gap:60px; margin-bottom:70px; }
+        .specialty-services__intro h2 { max-width:840px; margin:14px 0 0; font-family:Georgia,"Times New Roman",serif; font-size:clamp(2.8rem,5vw,5.6rem); font-weight:500; line-height:.98; letter-spacing:-.05em; color:#082e3f; }
+        .specialty-services__intro > p { margin:0; color:#5d7374; line-height:1.85; }
+        .specialty-service { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,.9fr) minmax(440px,1.1fr); align-items:center; gap:80px; padding:72px 0; border-top:1px solid rgba(9,69,72,.11); }
+        .specialty-service:last-child { border-bottom:1px solid rgba(9,69,72,.11); }
+        .specialty-service--reverse .specialty-service__content { order:2; }
+        .specialty-service--reverse .specialty-service__visual { order:1; }
+        .specialty-service__number { display:inline-flex; align-items:center; gap:12px; color:#17837f; font-size:.72rem; font-weight:800; letter-spacing:.22em; text-transform:uppercase; }
+        .specialty-service__number::before { content:""; width:40px; height:1px; background:#17837f; }
+        .specialty-service__content h3 { max-width:650px; margin:20px 0 0; color:#082e3f; font-family:Georgia,"Times New Roman",serif; font-size:clamp(2.5rem,4vw,4.8rem); font-weight:500; line-height:1.02; letter-spacing:-.045em; }
+        .specialty-service__content > p { max-width:650px; margin:24px 0 0; color:#5d7374; font-size:1.02rem; line-height:1.85; }
+        .specialty-service__features { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 24px; margin-top:30px; }
+        .specialty-service__features span { display:flex; align-items:center; gap:10px; color:#274f53; font-size:.86rem; font-weight:700; }
+        .specialty-service__features span svg { flex:0 0 auto; color:#1b9188; }
+        .specialty-service__content > a { display:inline-flex; align-items:center; gap:10px; margin-top:34px; color:#0f7a75; font-weight:800; }
+        .specialty-service__content > a svg { transition:transform .2s ease; }
+        .specialty-service__content > a:hover svg { transform:translateX(5px); }
+        .specialty-service__visual { position:relative; min-height:520px; display:grid; place-items:center; }
+        .specialty-visual__halo { position:absolute; width:72%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,#fff 0 23%,rgba(207,239,229,.74) 45%,rgba(87,181,166,.15) 68%,transparent 72%); box-shadow:0 45px 100px rgba(13,78,79,.14); }
+        .specialty-visual__orbit { position:absolute; width:82%; aspect-ratio:1; border:1px solid rgba(31,143,135,.24); border-radius:50%; animation:premOrbit 24s linear infinite; }
+        .specialty-visual__orbit::before,.specialty-visual__orbit::after { content:""; position:absolute; width:9px; height:9px; border-radius:50%; background:#42ad9f; box-shadow:0 0 18px rgba(66,173,159,.75); }
+        .specialty-visual__orbit::before { top:-5px; left:49%; } .specialty-visual__orbit::after { right:8%; bottom:15%; width:7px; height:7px; }
+        .specialty-visual__core { position:relative; z-index:2; display:grid; place-items:center; width:270px; height:270px; border-radius:42% 58% 53% 47% / 48% 44% 56% 52%; background:linear-gradient(145deg,#0a4d55,#249288); box-shadow:0 38px 80px rgba(10,72,76,.24); color:white; animation:logoFloat 5s ease-in-out infinite; }
+        .specialty-visual__core svg { width:96px; height:96px; stroke-width:1.35; }
+        .specialty-visual__badge { position:absolute; z-index:4; display:flex; align-items:center; gap:10px; padding:14px 16px; border:1px solid rgba(255,255,255,.75); border-radius:18px; background:rgba(255,255,255,.72); box-shadow:0 20px 45px rgba(11,78,78,.12); color:#174e52; backdrop-filter:blur(14px); font-size:.76rem; font-weight:800; }
+        .specialty-visual__badge svg { color:#18877f; }
+        .specialty-visual__badge--one { top:14%; left:2%; animation:chipFloat 4.3s ease-in-out infinite; }
+        .specialty-visual__badge--two { right:1%; bottom:16%; animation:chipFloat 4.8s ease-in-out infinite .6s; }
+        .specialty-visual__line { position:absolute; width:68%; height:1px; background:linear-gradient(90deg,transparent,rgba(52,151,142,.55),transparent); }
+        .specialty-visual__line--one { transform:rotate(24deg); } .specialty-visual__line--two { transform:rotate(-20deg); }
+        @media (max-width:1000px) { .specialty-services__intro,.specialty-service { grid-template-columns:1fr; gap:45px; } .specialty-service--reverse .specialty-service__content,.specialty-service--reverse .specialty-service__visual { order:initial; } .specialty-service__visual { min-height:470px; } }
+        @media (max-width:620px) { .specialty-services__intro { gap:24px; margin-bottom:40px; } .specialty-service { padding:55px 0; } .specialty-service__features { grid-template-columns:1fr; } .specialty-service__visual { min-height:390px; } .specialty-visual__core { width:210px; height:210px; } .specialty-visual__core svg { width:72px; height:72px; } .specialty-visual__badge { padding:11px 12px; font-size:.66rem; } .specialty-visual__badge--one { left:0; top:12%; } .specialty-visual__badge--two { right:0; bottom:12%; } }
+
         @media (prefers-reduced-motion: reduce) { .hero-logo-stage *, .hero-logo-stage *::before, .hero-logo-stage *::after { animation:none !important; } }
+
+        /* Premium interaction system */
+        .site::before {
+          content: "";
+          position: fixed;
+          left: var(--pointer-x, 50vw);
+          top: var(--pointer-y, 50vh);
+          width: 420px;
+          height: 420px;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 40;
+          opacity: .15;
+          transform: translate(-50%, -50%);
+          background: radial-gradient(circle, rgba(91, 203, 188, .42), transparent 68%);
+          mix-blend-mode: multiply;
+          transition: opacity .25s ease;
+        }
+
+        .reveal-on-scroll {
+          opacity: 0;
+          transform: translateY(34px) scale(.985);
+          filter: blur(2px);
+          transition:
+            opacity .85s cubic-bezier(.2,.75,.2,1) var(--reveal-delay, 0ms),
+            transform .85s cubic-bezier(.2,.75,.2,1) var(--reveal-delay, 0ms),
+            filter .85s ease var(--reveal-delay, 0ms);
+        }
+
+        .reveal-on-scroll.is-visible {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+
+        .hero-logo-stage__logo-wrap {
+          translate: var(--parallax-x, 0) var(--parallax-y, 0);
+          transition: translate .22s ease-out;
+        }
+
+        .hero-logo-stage__orbit--outer {
+          translate: calc(var(--parallax-x, 0) * -.25) calc(var(--parallax-y, 0) * -.25);
+        }
+
+        .hero-logo-stage__orbit--inner {
+          translate: calc(var(--parallax-x, 0) * .22) calc(var(--parallax-y, 0) * .22);
+        }
+
+        .service-card,
+        .architecture-card,
+        .specialty-service,
+        .performance-item,
+        .contact-card {
+          position: relative;
+          overflow: hidden;
+          isolation: isolate;
+          transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease, border-color .45s ease;
+        }
+
+        .service-card::before,
+        .architecture-card::before,
+        .specialty-service::before,
+        .performance-item::before,
+        .contact-card::before {
+          content: "";
+          position: absolute;
+          inset: -1px;
+          pointer-events: none;
+          z-index: -1;
+          opacity: 0;
+          background: radial-gradient(520px circle at 15% 5%, rgba(120, 220, 204, .2), transparent 45%);
+          transition: opacity .45s ease;
+        }
+
+        .service-card:hover,
+        .performance-item:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 30px 70px rgba(10, 72, 78, .14);
+        }
+
+        .architecture-card:hover,
+        .specialty-service:hover {
+          transform: translateY(-7px);
+          box-shadow: 0 36px 90px rgba(10, 72, 78, .14);
+        }
+
+        .service-card:hover::before,
+        .architecture-card:hover::before,
+        .specialty-service:hover::before,
+        .performance-item:hover::before,
+        .contact-card:hover::before { opacity: 1; }
+
+        .service-card__icon,
+        .architecture-card__icon,
+        .specialty-visual__core {
+          transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease;
+        }
+
+        .service-card:hover .service-card__icon,
+        .architecture-card:hover .architecture-card__icon { transform: rotate(-7deg) scale(1.12); }
+
+        .specialty-service:hover .specialty-visual__core {
+          transform: scale(1.1) rotate(5deg);
+          box-shadow: 0 0 0 18px rgba(84, 190, 175, .08), 0 25px 55px rgba(13, 93, 91, .2);
+        }
+
+        .specialty-visual__orbit { animation: premOrbit 18s linear infinite; }
+        .specialty-visual__badge { animation: chipFloat 4.6s ease-in-out infinite; }
+        .specialty-visual__badge--two { animation-delay: .9s; }
+
+        .service-card a svg,
+        .architecture-card a svg,
+        .specialty-service a svg,
+        .button svg { transition: transform .25s ease; }
+        .service-card a:hover svg,
+        .architecture-card a:hover svg,
+        .specialty-service a:hover svg,
+        .button:hover svg { transform: translateX(5px); }
+
+        .technology-strip__items span,
+        .expertise-pill-list span,
+        .project-card__tags span {
+          transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+        }
+        .technology-strip__items span:hover,
+        .expertise-pill-list span:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 28px rgba(15, 92, 91, .1);
+        }
+
+        .architecture-node { animation: chipFloat 4.8s ease-in-out infinite; }
+        .architecture-node--two { animation-delay: .7s; }
+        .architecture-node--three { animation-delay: 1.4s; }
+
+        @media (max-width: 760px) {
+          .site::before { display: none; }
+          .reveal-on-scroll { transform: translateY(22px); filter: blur(4px); }
+          .service-card:hover, .architecture-card:hover, .specialty-service:hover, .performance-item:hover { transform: none; }
+        }
+
+        /* Refined service interactions: motion stays inside the section, never shifts the layout */
+        .specialty-service {
+          gap: clamp(52px, 7vw, 104px);
+          padding-block: clamp(78px, 8vw, 126px);
+          overflow: visible;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+        .specialty-service::before { display: none; }
+        .specialty-service__content { padding: clamp(12px, 2vw, 28px) 0; }
+        .specialty-service__content h3 { margin-top: 18px; }
+        .specialty-service__features { gap: 16px clamp(20px, 3vw, 34px); margin-top: 34px; }
+        .specialty-service__features span {
+          min-height: 34px;
+          align-items: flex-start;
+          line-height: 1.45;
+        }
+        .specialty-service__visual {
+          min-height: clamp(430px, 42vw, 590px);
+          border-radius: clamp(30px, 4vw, 54px);
+          transition: background .4s ease, box-shadow .4s ease;
+        }
+        .specialty-service:hover .specialty-service__visual {
+          background: radial-gradient(circle at center, rgba(255,255,255,.72), rgba(216,244,236,.2) 52%, transparent 72%);
+          box-shadow: inset 0 0 0 1px rgba(29,139,131,.08), 0 28px 80px rgba(11,79,80,.09);
+        }
+        .specialty-service:hover .specialty-visual__core {
+          transform: scale(1.045) rotate(2deg);
+          box-shadow: 0 0 0 14px rgba(84,190,175,.07), 0 30px 68px rgba(13,93,91,.22);
+        }
+        .specialty-service:hover .specialty-visual__badge--one { transform: translateY(-5px); }
+        .specialty-service:hover .specialty-visual__badge--two { transform: translateY(5px); }
+        .specialty-visual__badge { transition: transform .35s ease, box-shadow .35s ease, background .35s ease; }
+        .specialty-service:hover .specialty-visual__badge { background: rgba(255,255,255,.88); box-shadow: 0 22px 50px rgba(11,78,78,.15); }
+
+        @media (prefers-reduced-motion: reduce) {
+          .reveal-on-scroll, .reveal-on-scroll.is-visible {
+            opacity: 1 !important;
+            transform: none !important;
+            filter: none !important;
+            transition: none !important;
+          }
+          .specialty-visual__orbit, .specialty-visual__badge, .architecture-node { animation: none !important; }
+        }
       `}</style>
       <header
         className={`site-header ${
@@ -374,6 +987,11 @@ function App() {
 
           <div className="container hero__grid">
             <div className="hero__content">
+              <p className="hero-brand-tagline">Technology built around your business</p>
+              <h1 className="hero-brand-name">
+                Prem<span>Techs</span>
+              </h1>
+
               <p className="eyebrow">
                 <span />
                 Cloud • Network • Security
@@ -458,12 +1076,9 @@ function App() {
                 <span><strong>Connected</strong><small>Always available</small></span>
               </div>
 
-              <div className="hero-mini-node hero-mini-node--server"><Server size={18} /></div>
-              <div className="hero-mini-node hero-mini-node--database"><Database size={18} /></div>
-
               <div className="hero-logo-stage__status">
                 <span />
-                PremTechs infrastructure online
+                Powered by PremTechs
               </div>
             </div>
           </div>
@@ -479,48 +1094,115 @@ function App() {
           </div>
         </section>
 
-        <section className="section services" id="services">
-          <div className="container">
-            <div className="section-heading section-heading--center">
-              <p className="section-label">Our services</p>
+        <section className="brand-story" aria-labelledby="about-premtechs-title">
+          <div className="container brand-story__shell">
+            <div className="brand-story__identity">
+              <div className="brand-story__logo-lockup">
+                <span className="brand-story__logo-frame">
+                  <img src={logo} alt="PremTechs symbol" />
+                </span>
+                <p className="brand-story__name">
+                  Prem<span>Techs</span>
+                </p>
+              </div>
 
-              <h2>End-to-end technology designed for your success.</h2>
+              <div className="brand-story__identity-copy">
+                <strong>Technology that works as one</strong>
+                <p>
+                  One accountable partner for the systems that connect, protect,
+                  and support your organization.
+                </p>
+              </div>
+            </div>
+
+            <div className="brand-story__copy">
+              <p className="section-label section-label--light">About PremTechs</p>
+              <h2 id="about-premtechs-title" className="brand-story__headline">
+                <span>One technology partner.</span>
+                <span>Every critical layer.</span>
+                <span>Connected.</span>
+              </h2>
+              <p>
+                PremTechs designs, secures, deploys, and supports complete technology
+                environments across cloud, networking, cybersecurity, structured
+                cabling, surveillance, communication systems, and managed IT. Our
+                practical engineering approach gives organizations a reliable,
+                scalable foundation that is easier to operate and ready to grow.
+              </p>
+
+              <div className="brand-story__pillars">
+                <span>Cloud Infrastructure</span>
+                <span>Network &amp; Security</span>
+                <span>Cybersecurity</span>
+                <span>Cabling &amp; Fiber</span>
+                <span>Surveillance &amp; Communication</span>
+                <span>Managed IT Services</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section specialty-services" id="services">
+          <div className="container">
+            <div className="specialty-services__intro">
+              <div>
+                <p className="section-label">Our services</p>
+                <h2>Complete technology services, designed as one connected environment.</h2>
+              </div>
 
               <p>
-                One experienced technology partner for the infrastructure,
-                connectivity, protection, and support your business depends on.
+                PremTechs brings cloud, networking, cybersecurity, monitoring,
+                physical infrastructure, surveillance, and communication systems
+                together through one consistent strategy, delivery process, and
+                long-term support model.
               </p>
             </div>
 
-            <div className="services-grid">
-              {services.map((service, index) => (
-                <article className="service-card" key={service.title}>
-                  <div className="service-card__top">
-                    <span className="service-card__icon">{service.icon}</span>
-                    <span className="service-card__number">
-                      0{index + 1}
-                    </span>
-                  </div>
-
+            {services.map((service, index) => (
+              <article
+                className={`specialty-service ${index % 2 === 1 ? "specialty-service--reverse" : ""}`}
+                key={service.title}
+              >
+                <div className="specialty-service__content">
+                  <span className="specialty-service__number">
+                    Service {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <p className="section-label">{service.eyebrow}</p>
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
 
-                  <div className="service-card__points">
-                    {service.points.map((point) => (
-                      <span key={point}>
-                        <Check size={14} />
-                        {point}
+                  <div className="specialty-service__features">
+                    {service.points.map((feature) => (
+                      <span key={feature}>
+                        <Check size={16} />
+                        {feature}
                       </span>
                     ))}
                   </div>
 
-                  <a href="/contact" aria-label={`Learn about ${service.title}`}>
-                    Explore service
-                    <ArrowRight size={17} />
+                  <a href="/contact">
+                    Discuss this service
+                    <ArrowRight size={18} />
                   </a>
-                </article>
-              ))}
-            </div>
+                </div>
+
+                <div className="specialty-service__visual" aria-hidden="true">
+                  <div className="specialty-visual__halo" />
+                  <div className="specialty-visual__orbit" />
+                  <div className="specialty-visual__line specialty-visual__line--one" />
+                  <div className="specialty-visual__line specialty-visual__line--two" />
+                  <div className="specialty-visual__core">{service.icon}</div>
+                  <span className="specialty-visual__badge specialty-visual__badge--one">
+                    {service.badgeOne.icon}
+                    {service.badgeOne.label}
+                  </span>
+                  <span className="specialty-visual__badge specialty-visual__badge--two">
+                    {service.badgeTwo.icon}
+                    {service.badgeTwo.label}
+                  </span>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -573,7 +1255,7 @@ function App() {
             <div className="section-heading architecture__heading">
               <div>
                 <p className="section-label">Core solutions</p>
-                <h2>Three foundations for reliable modern operations.</h2>
+                <h2>Reliable foundations for modern operations.</h2>
               </div>
 
               <p>
@@ -646,15 +1328,15 @@ function App() {
         <section className="section approach" id="about">
           <div className="container approach-grid">
             <div className="approach-copy">
-              <p className="section-label">Our approach</p>
+              <p className="section-label">Strategy and delivery</p>
 
-              <h2>Clear strategy before complex technology.</h2>
+              <h2>Clear strategy and technology designed to move your business forward.</h2>
 
               <p>
-                PremTechs starts with your business requirements, current
-                environment, risks, priorities, and future direction. We then
-                create a practical architecture that your organization can
-                operate and grow with confidence.
+                PremTechs delivers secure, reliable, and scalable solutions across
+                cloud, networking, cybersecurity, surveillance, communications,
+                and IT infrastructure. We manage every stage, from planning and
+                implementation to testing, documentation, and ongoing support.
               </p>
 
               <a href="/contact" className="button button--primary">
@@ -709,55 +1391,6 @@ function App() {
                   </p>
                 </div>
               </article>
-            </div>
-          </div>
-        </section>
-
-        <section className="section projects" id="projects">
-          <div className="container">
-            <div className="section-heading projects__heading">
-              <div>
-                <p className="section-label">Selected solutions</p>
-                <h2>Technology architecture with real business purpose.</h2>
-              </div>
-
-              <a href="/contact" className="button button--secondary">
-                Discuss Your Project
-                <ArrowRight size={18} />
-              </a>
-            </div>
-
-            <div className="projects-grid">
-              {projects.map((project) => (
-                <article className="project-card" key={project.title}>
-                  <div className="project-card__header">
-                    <span>{project.type}</span>
-                    <strong>{project.number}</strong>
-                  </div>
-
-                  <div className="project-card__visual">
-                    <div className="project-visual__line project-visual__line--one" />
-                    <div className="project-visual__line project-visual__line--two" />
-                    <div className="project-visual__circle" />
-
-                    <img src={logo} alt="" aria-hidden="true" />
-                  </div>
-
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-
-                  <div className="project-card__tags">
-                    {project.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-
-                  <a href="/contact">
-                    Explore solution
-                    <ArrowRight size={17} />
-                  </a>
-                </article>
-              ))}
             </div>
           </div>
         </section>
@@ -907,8 +1540,8 @@ function App() {
             </a>
 
             <p>
-              Enterprise cloud, networking, security, and managed technology
-              solutions built around your business.
+              PremTechs builds secure, scalable, and future-ready technology
+              environments around your business.
             </p>
           </div>
 
@@ -916,7 +1549,6 @@ function App() {
             <div>
               <h3>Company</h3>
               <a href="#about">About Us</a>
-              <a href="#projects">Projects</a>
               <a href="#expertise">Expertise</a>
               <a href="/contact">Contact</a>
             </div>

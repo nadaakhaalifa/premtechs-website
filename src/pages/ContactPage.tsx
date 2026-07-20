@@ -678,7 +678,7 @@ function ContactPage() {
 
                   <div>
                     <small>Business hours</small>
-                    <strong>Monday–Friday, 9:00 AM–6:00 PM</strong>
+                    <strong>Sunday–Thursday, 9:00 AM–6:00 PM</strong>
                   </div>
                 </div>
 
